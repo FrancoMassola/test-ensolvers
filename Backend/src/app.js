@@ -9,6 +9,10 @@ const app = express();
 //settings
 app.set("port", config.port);
 
+//middlewares, for understand the client request
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 //set routes to app
 app.use(taskroutes);
 

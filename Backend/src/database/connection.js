@@ -23,6 +23,8 @@ const dbSettings = {
   }
 };
 
+//export sql to use in controllers
 module.exports={
-  getConnection
+  getConnection,
+  sql
 }
