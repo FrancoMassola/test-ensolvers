@@ -46,10 +46,24 @@ const createNewTask = async (req, res) => {
   }
 };
 
-
+//get a task by id
+const getTasksById = async (req, res) => {
+  //get the id
+  const { id } = req.params;
+  //implement db connection
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("id", id)
+    .query(sqlQuerys.getTaskById);
+  console.log(result);
+  //getting the first element of result
+  res.send(result.recordset[0]);
+};
 
 //export all the functions
 module.exports = {
   getTasks,
   createNewTask,
+  getTasksById,
 };
