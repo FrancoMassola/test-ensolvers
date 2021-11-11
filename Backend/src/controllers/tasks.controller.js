@@ -21,10 +21,12 @@ const createNewTask = async (req, res) => {
 
   //handling the post request error form the server
   if (name_task == null || id_task_folder == null) {
-    return res.status(400).json({ msg: "Bad request" });
+    return res
+      .status(400)
+      .json({ msg: "Bad request, all the fields are required" });
   }
 
-  //set the default state to the new task added
+  //set the default state "False" to the new task added
   if (status_task == false) status_task = 0;
 
   try {
@@ -50,29 +52,39 @@ const createNewTask = async (req, res) => {
 const getTasksById = async (req, res) => {
   //get the id
   const { id } = req.params;
-  //implement db connection
-  const pool = await getConnection();
-  const result = await pool
-    .request()
-    .input("id", id)
-    .query(sqlQueries.getTaskById);
-  console.log(result);
-  //send the first element of result
-  res.send(result.recordset[0]);
+  try {
+    //implement db connection
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("id", id)
+      .query(sqlQueries.getTaskById);
+    console.log(result);
+    //send the first element of result
+    res.send(result.recordset[0]);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
 };
 
 //delete a task by id
 const deleteTask = async (req, res) => {
   //get the id
   const { id } = req.params;
-  //implement db connection
-  const pool = await getConnection();
-  const result = await pool
-    .request()
-    .input("id", id)
-    .query(sqlQueries.deleteTask);
-  //send a 204 status ok deleted
-  res.sendStatus(204);
+  try {
+    //implement db connection
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("id", id)
+      .query(sqlQueries.deleteTask);
+    //send a 204 status ok deleted
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
 };
 
 //implement the controller to update a task
@@ -81,18 +93,25 @@ const updateOneTask = async (req, res) => {
   const { id } = req.params;
   //handling the put request error form the server
   if (name_task == null || status_task == null) {
-    return res.status(400).json({ msg: "Bad request" });
+    return res
+      .status(400)
+      .json({ msg: "Bad request, all the fields are required" });
   }
-  //implement db connection
-  const pool = await getConnection();
-  const result = await pool
-    .request()
-    .input("name_task", sql.VarChar, name_task)
-    .input("status_task", sql.Bit, status_task)
-    .input("id", sql.Int, id)
-    .query(sqlQueries.updateTaskById);
+  try {
+    //implement db connection
+    const pool = await getConnection();
+    const result = await pool
+      .request()
+      .input("name_task", sql.VarChar, name_task)
+      .input("status_task", sql.Bit, status_task)
+      .input("id", sql.Int, id)
+      .query(sqlQueries.updateTaskById);
 
-  res.json({ name_task, status_task });
+    res.json({ name_task, status_task });
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
 };
 
 //export all the functions
@@ -101,5 +120,5 @@ module.exports = {
   createNewTask,
   getTasksById,
   deleteTask,
-  updateOneTask
+  updateOneTask,
 };
