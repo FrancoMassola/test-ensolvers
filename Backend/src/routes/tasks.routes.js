@@ -1,6 +1,6 @@
 //require Router module of express
 const Router = require("express");
-const { getTasks, createNewTask, getTasksById } = require("../controllers/tasks.controller");
+const { getTasks, createNewTask, getTasksById, deleteTask } = require("../controllers/tasks.controller");
 
 //generate a instance of the Router
 const router = Router();
@@ -14,7 +14,7 @@ router.get("/tasks/:id",getTasksById);
 //update a task
 router.put("/tasks");
 //delete a task
-router.delete("/tasks");
+router.delete("/tasks/:id",deleteTask);
 
 
 module.exports = router;

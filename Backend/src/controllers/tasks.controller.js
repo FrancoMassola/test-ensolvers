@@ -61,9 +61,24 @@ const getTasksById = async (req, res) => {
   res.send(result.recordset[0]);
 };
 
+//delete a task by id
+const deleteTask = async (req, res) => {
+  //get the id
+  const { id } = req.params;
+  //implement db connection
+  const pool = await getConnection();
+  const result = await pool
+    .request()
+    .input("id", id)
+    .query(sqlQuerys.deleteTask);
+  //Getting a 204 status ok deleted
+  res.sendStatus(204);
+};
+
 //export all the functions
 module.exports = {
   getTasks,
   createNewTask,
   getTasksById,
+  deleteTask
 };
