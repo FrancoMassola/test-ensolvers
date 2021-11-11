@@ -13,7 +13,7 @@ const dbSettings = {
 };
 
 //connect -> async function
-const getConnection = async () => {
+ const getConnection = async () => {
   //db request connection handler
   try {
     const pool = await sql.connect(dbSettings);
@@ -23,4 +23,6 @@ const getConnection = async () => {
   }
 };
 
-getConnection();
+module.exports={
+  getConnection
+}

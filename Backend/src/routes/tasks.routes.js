@@ -8,12 +8,12 @@ const router = Router();
 //get all tasks
 router.get("/tasks", getTasks);
 //add new task
-router.post("/tasks", getTasks);
+router.post("/tasks");
 //update a task
-router.put("/tasks", getTasks);
+router.put("/tasks");
 //delete a task
-router.delete("/tasks", getTasks);
+router.delete("/tasks");
 //get one especific task
-router.get("/tasks", getTasks);
+router.get("/tasks");
 
 module.exports = router;
