@@ -1,11 +1,12 @@
 const sql = require("mssql");
+const config = require("../config");
 
 //define db connection settings
 const dbSettings = {
-  user: "ensolvers",
-  password: "ensolvers123",
-  server: "localhost",
-  database: "testchallenge",
+  user: config.dbUser,
+  password: config.dbPassword,
+  server: config.dbServer,
+  database: config.dbDatabase,
   options: {
     encrypt: true, // for azure
     trustServerCertificate: true, // change to true for local dev / self-signed certs

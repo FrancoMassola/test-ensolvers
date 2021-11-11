@@ -1,6 +1,6 @@
 //require the db connection
 const { getConnection, sql } = require("../database/connection");
-const { sqlQueries } = require("../database/querys");
+const { sqlQueries } = require("../database/queries");
 
 //define the function to get all tasks
 const getTasks = async (req, res) => {

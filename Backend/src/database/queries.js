@@ -1,4 +1,4 @@
-//declare all the Sql querys
+//declare all the Sql queries
 const sqlQueries = {
   getAllTasks: "SELECT * FROM Task",
   addNewTask:
