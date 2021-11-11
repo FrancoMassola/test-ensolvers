@@ -18,12 +18,14 @@ const createNewTask = async (req, res) => {
   //excecute sql request
   await pool
     .request()
-    .input("name_task", sql.VarChar, "task_test")
-    .input("status_task", sql.Bit, "TRUE")
-    .input("id_task_folder", sql.Int, 1)
+    .input("name_task", sql.VarChar, name_task)
+    .input("status_task", sql.Bit, status_task)
+    .input("id_task_folder", sql.Int, id_task_folder)
     .query(
       "INSERT INTO Task (name_task, status_task,id_task_folder) VALUES (@name_task, @status_task, @id_task_folder)"
     );
+    //send the response to the client with the new task added
+    res.json({name_task,status_task,id_task_folder});
 };
 
 //export all the functions
