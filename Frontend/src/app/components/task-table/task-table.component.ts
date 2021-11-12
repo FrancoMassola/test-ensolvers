@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  FormBuilder,
-} from '@angular/forms';
 import { TaskServiceService } from 'src/app/services/task-service.service';
-import {Task} from '../../models/task';
+import { Task } from '../../models/task';
 
 @Component({
   selector: 'app-task-table',
@@ -15,22 +8,21 @@ import {Task} from '../../models/task';
   styleUrls: ['./task-table.component.css'],
 })
 export class TaskTableComponent implements OnInit {
-  
-  constructor(private taskService: TaskServiceService, private formBuilder: FormBuilder ) {
-    
-  }
+  constructor(private taskService: TaskServiceService) {}
 
-  taskForm!: FormGroup;
-  taskArray:Task[]=[];  
+  taskArray: Task[] = [];
 
   ngOnInit(): void {
     this.taskService.getAllTasks().subscribe((res) => {
-      res.map(task=>{
-        this.taskArray.push(task)
-      })      
+      res.map((task) => {
+        this.taskArray.push(task);
+      });
       console.log(this.taskArray);
-      
-      
     });
+  }
+
+  //update the task list when a new task was added
+  updateList(e: any) {
+    this.taskArray = [...this.taskArray, e];
   }
 }

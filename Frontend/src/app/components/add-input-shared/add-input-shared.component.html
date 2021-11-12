@@ -1,0 +1,17 @@
+<form
+  [formGroup]="newTaskData"
+  (ngSubmit)="saveTaskData(newTaskData.value)"
+  class="container"
+>
+  <div class="input-group mb-3">
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon1">
+      Add
+    </button>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="name_task"
+      placeholder="New Task"
+    />
+  </div>
+</form>
