@@ -12,7 +12,7 @@ router.post("/folders", folderControllers.createNewFolder );
 //get one especific folder
 router.get("/folders/:id", folderControllers.getFoldersById);
 //delete a folder
-router.delete("/folders/:id",);
+router.delete("/folders/:id",folderControllers.deleteFolder);
 
 
 module.exports = router;

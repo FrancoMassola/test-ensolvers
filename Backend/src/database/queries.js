@@ -10,6 +10,8 @@ const sqlQueries = {
   addNewFolder:
   "INSERT INTO Folder (name_folder) VALUES (@name_folder)",
   getFolderById: "SELECT * FROM Folder where id_folder = @id",
+  getFolderTasks: "SELECT * FROM Task as task INNER JOIN Folder as folder ON folder.id_folder=task.id_task_folder WHERE id_task_folder = @id_folder",
+  deleteFolder: "DELETE FROM Folder where id_folder = @idFolder",
 };
 
 module.exports = {
