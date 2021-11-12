@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-  AbstractControl,
-  FormBuilder,
-} from '@angular/forms';
 import { TaskServiceService } from 'src/app/services/task-service.service';
-import {Task} from '../../models/task';
+import { Task } from '../../models/task';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-table',
@@ -15,22 +9,60 @@ import {Task} from '../../models/task';
   styleUrls: ['./task-table.component.css'],
 })
 export class TaskTableComponent implements OnInit {
-  
-  constructor(private taskService: TaskServiceService, private formBuilder: FormBuilder ) {
-    
-  }
+  constructor(
+    private taskService: TaskServiceService,
+    private router: Router
+  ) {}
 
-  taskForm!: FormGroup;
-  taskArray:Task[]=[];  
+  taskArray: Task[] = [];
+  taskToUpdate!: any;
 
   ngOnInit(): void {
+    this.getAllTheTasks();
+  }
+
+  //update the task list when a new task was added
+  updateList(e: any) {
+    this.taskArray = [...this.taskArray, e];
+  }
+
+  goToEditView(taskId: any) {
+    this.router.navigate([`/editTask/${taskId}`]);
+  }
+
+  deleteTask = (e: any) => {
+    this.taskService.deleteTask(e).subscribe(
+      (res) => {
+        this.taskArray = [];
+        this.getAllTheTasks();
+      },
+      (err) => {}
+    );
+  };
+
+  //function to get all the tasks and set to the array to handle it
+  getAllTheTasks() {
     this.taskService.getAllTasks().subscribe((res) => {
-      res.map(task=>{
-        this.taskArray.push(task)
-      })      
-      console.log(this.taskArray);
-      
-      
+      res.map((task) => {
+        this.taskArray.push(task);
+      });
     });
+  }
+
+  //change the status of a task
+  statusChanged(task_status: any, task_id: any) {
+    this.taskService.getTaskById(task_id).subscribe(
+      (res) => {
+        res.status_task = task_status;
+        this.taskService.updateTask(task_id, res).subscribe(
+          (res) => {
+            console.log('updated');
+          },
+          (err) => {}
+        );
+      },
+      (err) => {}
+    );
+    console.log(this.taskToUpdate);
   }
 }

@@ -20,7 +20,7 @@ const createNewTask = async (req, res) => {
   let { name_task, status_task, id_task_folder } = req.body;
 
   //handling the post request error form the server
-  if (name_task == null || id_task_folder == null) {
+  if (name_task == null) {
     return res
       .status(400)
       .json({ msg: "Bad request, all the fields are required" });
@@ -92,7 +92,7 @@ const updateOneTask = async (req, res) => {
   let { name_task, status_task } = req.body;
   const { id } = req.params;
   //handling the put request error form the server
-  if (name_task == null || status_task == null) {
+  if (name_task == null) {
     return res
       .status(400)
       .json({ msg: "Bad request, all the fields are required" });

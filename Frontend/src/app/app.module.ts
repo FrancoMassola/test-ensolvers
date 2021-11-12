@@ -15,6 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
 import { UpdateTaskComponent } from './pages/update-task/update-task.component';
 import { AddInputSharedComponent } from './components/add-input-shared/add-input-shared.component';
+//Angular material buttons
+import {MatButtonModule} from '@angular/material/button';
+import { UpdateInputTaskComponent } from './components/update-input-task/update-input-task.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +29,7 @@ import { AddInputSharedComponent } from './components/add-input-shared/add-input
     HeaderComponent,
     UpdateTaskComponent,
     AddInputSharedComponent,
+    UpdateInputTaskComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,8 @@ import { AddInputSharedComponent } from './components/add-input-shared/add-input
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
     
   ],
   providers: [],
