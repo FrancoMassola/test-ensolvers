@@ -29,6 +29,10 @@ export class FolderServiceService {
   getFolderTasks(folderId: any):Observable<Task[]>{
     return this.http.get<Task[]>(`${this.URL}/folderTasks/`+folderId);
   }
+
+  deleteFolder(idFolder: any): Observable<any> {
+    return this.http.delete<any>(`${this.URL}/folders/${idFolder}`, this.httpOptions);
+  }
   
 
 }

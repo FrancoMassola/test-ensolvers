@@ -30,6 +30,7 @@ export class TaskTableComponent implements OnInit {
   }
 
   goToEditView(taskId: any) {
+    console.log(taskId);
     this.router.navigate([`/editTask/${taskId}`]);
   }
 

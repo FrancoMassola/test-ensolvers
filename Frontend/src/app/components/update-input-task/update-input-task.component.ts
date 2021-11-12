@@ -45,15 +45,16 @@ export class UpdateInputTaskComponent implements OnInit {
     );
   }
 
-  updateTaskData(taskUpdated: any) {
+  async updateTaskData(taskUpdated: any) {
     this.taskFounded.name_task = taskUpdated.name_task;
     //Send the task to update
-    this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
+    await this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
       (res) => {
-        let id_folder = localStorage.getItem('folderId');
-        this.router.navigate([`tasks/${id_folder}`]);
+        
       },
       (err) => {}
     );
+    let id_folder = localStorage.getItem('folderId');
+        this.router.navigate([`tasks/${id_folder}`]);
   }
 }
