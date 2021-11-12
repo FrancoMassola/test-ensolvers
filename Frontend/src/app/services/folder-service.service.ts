@@ -25,6 +25,10 @@ export class FolderServiceService {
   createNewFolder(folder: Folder):Observable<any>{
     return this.http.post<Folder>(`${this.URL}/folders`,folder,this.httpOptions);
   }
+
+  getFolderTasks(folderId: any):Observable<Task[]>{
+    return this.http.get<Task[]>(`${this.URL}/folderTasks/`+folderId);
+  }
   
 
 }

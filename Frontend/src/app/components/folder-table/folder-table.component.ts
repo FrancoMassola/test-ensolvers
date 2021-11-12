@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Folder } from 'src/app/models/folder';
 import { FolderServiceService } from 'src/app/services/folder-service.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-folder-table',
@@ -9,7 +10,7 @@ import { FolderServiceService } from 'src/app/services/folder-service.service';
 })
 export class FolderTableComponent implements OnInit {
 
-  constructor(private folderService: FolderServiceService) { }
+  constructor(private folderService: FolderServiceService, private router: Router) { }
 
   folderArray: Folder[] = [];
 
@@ -29,6 +30,10 @@ export class FolderTableComponent implements OnInit {
 
   updateFolderList(newFolder: any){
     this.folderArray=[...this.folderArray,newFolder]
+  }
+
+  goToListTasks=(folderId: any)=>{
+    this.router.navigate([`/tasks/${folderId}`])
   }
 
 }

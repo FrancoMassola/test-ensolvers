@@ -12,7 +12,7 @@
           
           <td colspan="2">{{ folder.name_folder }}</td>
           <td>
-            <button mat-button color="primary" >View items</button>
+            <button mat-button color="primary" (click)="goToListTasks(folder.id_folder)">View items</button>
             <button mat-button color="warn" >Delete</button>
           </td>
         </tr>

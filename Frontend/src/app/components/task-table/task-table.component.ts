@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskServiceService } from 'src/app/services/task-service.service';
 import { Task } from '../../models/task';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-task-table',
@@ -11,14 +11,16 @@ import { Router } from '@angular/router';
 export class TaskTableComponent implements OnInit {
   constructor(
     private taskService: TaskServiceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   taskArray: Task[] = [];
   taskToUpdate!: any;
+  folderId: any;
 
   ngOnInit(): void {
-    this.getAllTheTasks();
+    this.getAllTheFolderTasks();
   }
 
   //update the task list when a new task was added
@@ -34,15 +36,17 @@ export class TaskTableComponent implements OnInit {
     this.taskService.deleteTask(taskToDelete).subscribe(
       (res) => {
         this.taskArray = [];
-        this.getAllTheTasks();
+        this.getAllTheFolderTasks();
       },
       (err) => {}
     );
   };
 
   //function to get all the tasks and set to the array to handle it
-  getAllTheTasks() {
-    this.taskService.getAllTasks().subscribe((res) => {
+  getAllTheFolderTasks() {
+    // get the task id by url
+    this.folderId = this.route.snapshot.params['id_folder'];
+    this.taskService.getAllFolderTasks(this.folderId).subscribe((res) => {
       res.map((task) => {
         this.taskArray.push(task);
       });

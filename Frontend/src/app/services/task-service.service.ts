@@ -18,7 +18,7 @@ export class TaskServiceService {
   };
 
   constructor(private http: HttpClient) { }
-
+ 
   getAllTasks():Observable<Task[]>{
     return this.http.get<Task[]>(`${this.URL}/tasks`);
   }
@@ -37,6 +37,10 @@ export class TaskServiceService {
 
   deleteTask(idTask: any): Observable<any> {
     return this.http.delete<any>(`${this.URL}/tasks/${idTask}`, this.httpOptions);
+  }
+
+  getAllFolderTasks(idFolder: any):Observable<Task[]>{
+    return this.http.get<Task[]>(`${this.URL}/folderTasks/${idFolder}`);
   }
 
 }
