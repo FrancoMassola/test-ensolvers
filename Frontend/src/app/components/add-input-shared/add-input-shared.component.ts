@@ -19,7 +19,7 @@ export class AddInputSharedComponent implements OnInit {
     private taskService: TaskServiceService,
     private route: ActivatedRoute
   ) {}
-  @Output() newItemEvent = new EventEmitter<any>();
+  @Output() addTaskEvent = new EventEmitter<any>();
   newTaskData!: FormGroup;
   folderId: any;
 
@@ -48,7 +48,7 @@ export class AddInputSharedComponent implements OnInit {
         this.taskService.getAllTasks().subscribe(
           (res) => {
             //send the data to the parent -task-table- component
-            this.newItemEvent.emit(taskToSend);
+            this.addTaskEvent.emit(taskToSend);
           },
           (err) => {}
         );

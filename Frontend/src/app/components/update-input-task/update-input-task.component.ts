@@ -33,7 +33,6 @@ export class UpdateInputTaskComponent implements OnInit {
     });
     // get the task id by url
     this.taskId = this.route.snapshot.params['id'];
-    console.log(this.taskId);
     this.taskService.getTaskById(this.taskId).subscribe(
       (res) => {
         //get a especific task by id
@@ -51,7 +50,8 @@ export class UpdateInputTaskComponent implements OnInit {
     //Send the task to update
     this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
       (res) => {
-        this.router.navigate(['tasks'])
+        let id_folder = localStorage.getItem('folderId');
+        this.router.navigate([`tasks/${id_folder}`]);
       },
       (err) => {}
     );

@@ -21,6 +21,7 @@ export class TaskTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllTheFolderTasks();
+    localStorage.setItem('folderId', this.folderId);
   }
 
   //update the task list when a new task was added
