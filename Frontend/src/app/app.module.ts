@@ -29,7 +29,7 @@ import { UpdateInputTaskComponent } from './components/update-input-task/update-
     HeaderComponent,
     UpdateTaskComponent,
     AddInputSharedComponent,
-    UpdateInputTaskComponent,
+    UpdateInputTaskComponent
   ],
   imports: [
     BrowserModule,
