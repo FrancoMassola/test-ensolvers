@@ -40,7 +40,9 @@ export class TaskTableComponent implements OnInit {
         this.taskArray = [];
         this.getAllTheFolderTasks();
       },
-      (err) => {}
+      (err) => {
+        alert("Error about delete a task request ->"+ err);
+      }
     );
   };
 
@@ -64,10 +66,14 @@ export class TaskTableComponent implements OnInit {
           (res) => {
             console.log('updated');
           },
-          (err) => {}
+          (err) => {
+            alert("Error about update a task request ->"+ err);
+          }
         );
       },
-      (err) => {}
+      (err) => {
+        alert("Error about get a especific task request ->"+ err);
+      }
     );
     console.log(this.taskToUpdate);
   }

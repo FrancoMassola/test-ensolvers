@@ -41,7 +41,9 @@ export class UpdateInputTaskComponent implements OnInit {
         this.taskFounded.status_task = res.status_task;
         this.taskFounded.id_task_folder = res.id_task_folder;
       },
-      (err) => {}
+      (err) => {
+        alert("Error about get a especific task request ->"+ err);
+      }
     );
   }
 
@@ -50,9 +52,11 @@ export class UpdateInputTaskComponent implements OnInit {
     //Send the task to update
     await this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
       (res) => {
-        
+        console.log(res);
       },
-      (err) => {}
+      (err) => {
+        alert("Error about update a task request ->"+ err);
+      }
     );
     let id_folder = localStorage.getItem('folderId');
         this.router.navigate([`tasks/${id_folder}`]);

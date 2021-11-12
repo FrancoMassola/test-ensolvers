@@ -50,10 +50,14 @@ export class AddInputSharedComponent implements OnInit {
             //send the data to the parent -task-table- component
             this.addTaskEvent.emit(taskToSend);
           },
-          (err) => {}
+          (err) => {
+            alert("Error about the get task request ->"+ err);
+          }
         );
       },
-      (err) => {}
+      (err) => {
+        alert("Error about the post new task request ->"+ err);
+      }
     );
   }
 }

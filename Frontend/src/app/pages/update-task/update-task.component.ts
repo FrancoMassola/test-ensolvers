@@ -9,7 +9,12 @@ export class UpdateTaskComponent implements OnInit {
 
   constructor() { }
 
+  urlBack:any;
+  idFolder:any;
+
   ngOnInit(): void {
+    this.idFolder = localStorage.getItem('folderId');
+    this.urlBack = `tasks/${this.idFolder}`; 
   }
 
 }

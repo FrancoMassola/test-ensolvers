@@ -36,4 +36,11 @@ export class FolderTableComponent implements OnInit {
     this.router.navigate([`/tasks/${folderId}`])
   }
 
+  deleteFolder=(folderId: any)=>{
+    this.folderService.deleteFolder(folderId).subscribe(res=>{
+      this.folderArray = [];
+      this.getAllTheFolders();
+    })
+  }
+
 }

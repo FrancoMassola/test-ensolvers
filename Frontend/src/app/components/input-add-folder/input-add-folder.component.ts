@@ -41,10 +41,14 @@ export class InputAddFolderComponent implements OnInit {
             //send the data to the parent -task-table- component
             this.newFolderAdded.emit(folderToSend);
           },
-          (err) => {}
+          (err) => {
+            alert("Error in the get folders request ->"+ err);
+          }
         );
       },
-      (err) => {}
+      (err) => {
+        alert("Error about create new folder request ->"+ err);
+      }
     );
   }
 
