@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  @Input() urlBack = '';
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+
+  goBack(){
+    this.router.navigate([this.urlBack])
   }
 
 }

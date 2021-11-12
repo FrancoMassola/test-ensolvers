@@ -33,7 +33,6 @@ export class UpdateInputTaskComponent implements OnInit {
     });
     // get the task id by url
     this.taskId = this.route.snapshot.params['id'];
-    console.log(this.taskId);
     this.taskService.getTaskById(this.taskId).subscribe(
       (res) => {
         //get a especific task by id
@@ -42,18 +41,24 @@ export class UpdateInputTaskComponent implements OnInit {
         this.taskFounded.status_task = res.status_task;
         this.taskFounded.id_task_folder = res.id_task_folder;
       },
-      (err) => {}
+      (err) => {
+        alert("Error about get a especific task request ->"+ err);
+      }
     );
   }
 
-  updateTaskData(taskUpdated: any) {
+  async updateTaskData(taskUpdated: any) {
     this.taskFounded.name_task = taskUpdated.name_task;
     //Send the task to update
-    this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
+    await this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
       (res) => {
-        this.router.navigate(['tasks'])
+        console.log(res);
       },
-      (err) => {}
+      (err) => {
+        alert("Error about update a task request ->"+ err);
+      }
     );
+    let id_folder = localStorage.getItem('folderId');
+        this.router.navigate([`tasks/${id_folder}`]);
   }
 }

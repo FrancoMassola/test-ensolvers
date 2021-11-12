@@ -10,6 +10,7 @@ export class FoldersViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    localStorage.removeItem('folderId');
   }
 
 }

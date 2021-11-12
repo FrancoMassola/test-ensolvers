@@ -18,6 +18,9 @@ import { AddInputSharedComponent } from './components/add-input-shared/add-input
 //Angular material buttons
 import {MatButtonModule} from '@angular/material/button';
 import { UpdateInputTaskComponent } from './components/update-input-task/update-input-task.component';
+import { InputAddFolderComponent } from './components/input-add-folder/input-add-folder.component';
+import { FormLoginComponent } from './components/form-login/form-login.component';
+import { LoginViewComponent } from './pages/login-view/login-view.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { UpdateInputTaskComponent } from './components/update-input-task/update-
     HeaderComponent,
     UpdateTaskComponent,
     AddInputSharedComponent,
-    UpdateInputTaskComponent
+    UpdateInputTaskComponent,
+    InputAddFolderComponent,
+    FormLoginComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule,
