@@ -15,6 +15,7 @@ export class TaskTableComponent implements OnInit {
   ) {}
 
   taskArray: Task[] = [];
+  taskToUpdate!: any;
 
   ngOnInit(): void {
     this.getAllTheTasks();
@@ -46,5 +47,22 @@ export class TaskTableComponent implements OnInit {
         this.taskArray.push(task);
       });
     });
+  }
+
+  //change the status of a task
+  statusChanged(task_status: any, task_id: any) {
+    this.taskService.getTaskById(task_id).subscribe(
+      (res) => {
+        res.status_task = task_status;
+        this.taskService.updateTask(task_id, res).subscribe(
+          (res) => {
+            console.log('updated');
+          },
+          (err) => {}
+        );
+      },
+      (err) => {}
+    );
+    console.log(this.taskToUpdate);
   }
 }
