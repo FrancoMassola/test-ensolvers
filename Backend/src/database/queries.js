@@ -6,6 +6,9 @@ const sqlQueries = {
   getTaskById: "SELECT * FROM Task where id_task = @id",
   deleteTask: "DELETE FROM Task where id_task = @id",
   updateTaskById: "UPDATE Task SET name_task = @name_task, status_task = @status_task WHERE id_task = @id",
+  getAllFolders: "SELECT * FROM Folder",
+  addNewFolder:
+  "INSERT INTO Folder (name_folder) VALUES (@name_folder)",
 };
 
 module.exports = {
