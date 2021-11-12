@@ -1,1 +1,19 @@
-<p>task-table works!</p>
+<div class="container">
+  <h2>To-Do List</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Task Status</th>
+        <th colspan="2">Task Description</th>
+        <th>Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of taskArray">
+        <th scope="row"><input class="form-check-input" type="checkbox" value='{{task.id_task}}' [(ngModel)]="task.status_task" id="flexCheckDefault" ></th>
+        <td colspan="2">{{ task.name_task }}</td>
+        <td><a href="">Edit</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
