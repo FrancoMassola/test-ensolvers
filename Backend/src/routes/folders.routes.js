@@ -10,7 +10,7 @@ router.get("/folders", folderControllers.getFolders);
 //add new folder
 router.post("/folders", folderControllers.createNewFolder );
 //get one especific folder
-router.get("/folders/:id",);
+router.get("/folders/:id", folderControllers.getFoldersById);
 //delete a folder
 router.delete("/folders/:id",);
 

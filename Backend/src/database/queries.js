@@ -9,6 +9,7 @@ const sqlQueries = {
   getAllFolders: "SELECT * FROM Folder",
   addNewFolder:
   "INSERT INTO Folder (name_folder) VALUES (@name_folder)",
+  getFolderById: "SELECT * FROM Folder where id_folder = @id",
 };
 
 module.exports = {

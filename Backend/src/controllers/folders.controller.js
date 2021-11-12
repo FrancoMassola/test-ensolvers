@@ -43,8 +43,28 @@ const createNewFolder = async (req, res) => {
     }
   };
 
+  //get a folder by id
+const getFoldersById = async (req, res) => {
+    //get the id
+    const { id } = req.params;
+    try {
+      //implement db connection
+      const pool = await getConnection();
+      const result = await pool
+        .request()
+        .input("id", id)
+        .query(sqlQueries.getFolderById);
+      //send the first element of result
+      res.send(result.recordset[0]);
+    } catch (error) {
+      res.status(500);
+      res.send(error.message);
+    }
+  };
+
 //export all the functions
 module.exports = {
   getFolders,
-  createNewFolder
+  createNewFolder,
+  getFoldersById
 };
