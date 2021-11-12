@@ -11,6 +11,8 @@ export class TaskServiceService {
   //declare backend endpoint
   private URL = 'http://localhost:4000'
 
+
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -21,7 +23,7 @@ export class TaskServiceService {
     return this.http.get<Task[]>(`${this.URL}/tasks`);
   }
   
-  createNewTask(task: any):Observable<any>{
+  createNewTask(task: Task):Observable<any>{
     return this.http.post<Task>(`${this.URL}/tasks`,task,this.httpOptions);
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskServiceService } from 'src/app/services/task-service.service';
 import { Task } from '../../models/task';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-table',
@@ -8,7 +9,7 @@ import { Task } from '../../models/task';
   styleUrls: ['./task-table.component.css'],
 })
 export class TaskTableComponent implements OnInit {
-  constructor(private taskService: TaskServiceService) {}
+  constructor(private taskService: TaskServiceService, private router: Router) {}
 
   taskArray: Task[] = [];
 
@@ -25,4 +26,10 @@ export class TaskTableComponent implements OnInit {
   updateList(e: any) {
     this.taskArray = [...this.taskArray, e];
   }
+
+  goToEditView(taskId: any){
+    console.log(taskId);
+    this.router.navigate(['/editTask']);
+  }
+
 }

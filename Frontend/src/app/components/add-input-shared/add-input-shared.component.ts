@@ -6,12 +6,14 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { TaskServiceService } from 'src/app/services/task-service.service';
+import { Task } from 'src/app/models/task';
 
 @Component({
   selector: 'app-add-input-shared',
   templateUrl: './add-input-shared.component.html',
   styleUrls: ['./add-input-shared.component.css'],
 })
+
 export class AddInputSharedComponent implements OnInit {
   constructor(private taskService: TaskServiceService) {}
   @Output() newItemEvent = new EventEmitter<any>();
@@ -27,7 +29,8 @@ export class AddInputSharedComponent implements OnInit {
   }
 
   saveTaskData(form: any) {
-    let taskToSend = {
+    let taskToSend: Task = {
+      id_task: 0,
       name_task: form.name_task,
       status_task: 0,
       id_task_folder: 1,
