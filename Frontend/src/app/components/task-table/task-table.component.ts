@@ -22,16 +22,16 @@ export class TaskTableComponent implements OnInit {
   }
 
   //update the task list when a new task was added
-  updateList(e: any) {
-    this.taskArray = [...this.taskArray, e];
+  updateList(newTask: any) {
+    this.taskArray = [...this.taskArray, newTask];
   }
 
   goToEditView(taskId: any) {
     this.router.navigate([`/editTask/${taskId}`]);
   }
 
-  deleteTask = (e: any) => {
-    this.taskService.deleteTask(e).subscribe(
+  deleteTask = (taskToDelete: any) => {
+    this.taskService.deleteTask(taskToDelete).subscribe(
       (res) => {
         this.taskArray = [];
         this.getAllTheTasks();

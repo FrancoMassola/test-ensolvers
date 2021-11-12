@@ -6,6 +6,7 @@ import { UpdateTaskComponent } from './pages/update-task/update-task.component';
 
 
 const routes: Routes = [
+  { path: '', component: FoldersViewComponent },
   { path: 'tasks', component: TasksViewComponent },
   { path: 'folders', component:  FoldersViewComponent},
   { path: 'editTask/:id', component: UpdateTaskComponent },

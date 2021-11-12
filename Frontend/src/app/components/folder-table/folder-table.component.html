@@ -1,1 +1,23 @@
-<p>folder-table works!</p>
+<div class="container">
+    <h2>Folders</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th colspan="2">Folders</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr  *ngFor="let folder of folderArray">
+          
+          <td colspan="2">{{ folder.name_folder }}</td>
+          <td>
+            <button mat-button color="primary" >View items</button>
+            <button mat-button color="warn" >Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  <app-input-add-folder (newFolderAdded)="updateFolderList($event)"></app-input-add-folder>
+  </div>
+  
