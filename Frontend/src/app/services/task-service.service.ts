@@ -27,4 +27,12 @@ export class TaskServiceService {
     return this.http.post<Task>(`${this.URL}/tasks`,task,this.httpOptions);
   }
 
+  getTaskById(id: any):Observable<any>{
+    return this.http.get<Task>(`${this.URL}/tasks/${id}`);
+  }
+
+  updateTask(idTask: any,taskToUpdate: any): Observable<any>{
+    return this.http.put<any>(this.URL+'/tasks/'+idTask,taskToUpdate, this.httpOptions);
+  }
+
 }

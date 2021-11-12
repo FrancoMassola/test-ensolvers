@@ -8,7 +8,7 @@ import { UpdateTaskComponent } from './pages/update-task/update-task.component';
 const routes: Routes = [
   { path: 'tasks', component: TasksViewComponent },
   { path: 'folders', component:  FoldersViewComponent},
-  { path: 'editTask', component: UpdateTaskComponent },
+  { path: 'editTask/:id', component: UpdateTaskComponent },
 ];
 
 @NgModule({
