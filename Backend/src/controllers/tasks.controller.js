@@ -15,6 +15,24 @@ const getTasks = async (req, res) => {
   }
 };
 
+//define the function to get all especifics folder tasks
+const getFolderTasks = async (req, res) => {
+  let { id_folder } = req.params
+  try {
+    //implement getConnection and excecute the SQL request
+    const pool = await getConnection();
+    let result = await pool.request()
+    .input("id_folder", sql.Int, id_folder)
+    .query(sqlQueries.getFolderTasks);
+    res.json(result.recordset);
+  } catch (error) {
+    res.status(500);
+    res.send(error.message);
+  }
+};
+
+
+
 //function to add a new task into db
 const createNewTask = async (req, res) => {
   let { name_task, status_task, id_task_folder } = req.body;
@@ -121,4 +139,5 @@ module.exports = {
   getTasksById,
   deleteTask,
   updateOneTask,
+  getFolderTasks
 };
