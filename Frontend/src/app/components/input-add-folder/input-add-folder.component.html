@@ -1,0 +1,17 @@
+<form
+  [formGroup]="newFolderData"
+  (ngSubmit)="saveFolderData(newFolderData.value)"
+  class="container add-task"
+>
+  <div class="input-group mb-3">
+    <button class="btn btn-outline-secondary" type="submit" id="button-addon1">
+      Add
+    </button>
+    <input
+      type="text"
+      class="form-control"
+      formControlName="name_folder"
+      placeholder="New folder"
+    />
+  </div>
+</form>

@@ -1,0 +1,21 @@
+<form
+  class="form-horizontal"
+  [formGroup]="updateTask"
+  (ngSubmit)="updateTaskData(updateTask.value)"
+>
+  <h3>Editing Task</h3>
+  <div class="form-group">
+    <div class="container">
+      <input
+        type="text"
+        class="form-control"
+        name="name_task"
+        value="{{ taskFounded.name_task }}"
+        formControlName="name_task"
+      />
+    </div>
+  </div>
+  <button class="btn btn-success form-group" type="submit" id="button-addon1">
+    Done
+  </button>
+</form>
