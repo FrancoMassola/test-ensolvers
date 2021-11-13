@@ -1,0 +1,22 @@
+version: '3'
+services:
+  nodejs-server:
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    container_name: node-api
+    volumes:
+       - ./Backend/src
+       - /Backend/src/node_modules
+  angular-ui:
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    container_name: angular-ui
+    volumes:
+       - ./Frontend/src
+       - /Frontend/src/node_modules
