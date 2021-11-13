@@ -67,7 +67,7 @@ Frontend - Netlify
 - https://admiring-kowalevski-4f3eec.netlify.app/
 
 Bd - Azure
-- serverappx2020.database.windows.net
+- Server Name: serverappx2020.database.windows.net
 
 ## Azure details
 To get the access to the database deployed in azure, send me your public ip: email frann.massola@gmail.com.
