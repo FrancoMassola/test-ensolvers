@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-login',
@@ -7,8 +9,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form-login.component.css'],
 })
 export class FormLoginComponent implements OnInit {
-  constructor() {}
+  constructor(private loginService: LoginService, private router: Router) {}
   loginForm!: FormGroup;
+  user = {
+    user_name: "",
+    password: ""
+  }
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       user_name: new FormControl('', [
@@ -23,6 +29,16 @@ export class FormLoginComponent implements OnInit {
   }
 
   login(form: any) {
-    console.log(form);
+    this.user.user_name = form.user_name;
+    this.user.password = form.password;
+    this.loginService.signinUser(this.user).subscribe(res=>{
+     localStorage.setItem('token',res.token)
+     this.router.navigate(['folders'])
+    },
+    err=>{
+        console.log(err);
+        
+    })
+    
   }
 }
