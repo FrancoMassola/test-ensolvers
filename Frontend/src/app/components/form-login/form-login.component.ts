@@ -36,8 +36,7 @@ export class FormLoginComponent implements OnInit {
      this.router.navigate(['folders'])
     },
     err=>{
-        console.log(err);
-        
+        alert('signin failed') 
     })
     
   }

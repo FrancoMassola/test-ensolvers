@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,14 +8,25 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   @Input() urlBack = '';
-  constructor(private router: Router) { }
+  @Input() buttonTitle = '';
+
+  url!: string;
+
+  constructor(private router: Router) {
+   }
+  
 
   ngOnInit(): void {
+  
   }
-
-
+  
   goBack(){
+    if(this.buttonTitle=='Logout'){
+      //remove all the local storage items
+      localStorage.clear();
+    }
     this.router.navigate([this.urlBack])
   }
+
 
 }

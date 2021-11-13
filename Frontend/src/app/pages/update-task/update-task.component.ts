@@ -11,6 +11,7 @@ export class UpdateTaskComponent implements OnInit {
 
   urlBack:any;
   idFolder:any;
+  title = 'Back';
 
   ngOnInit(): void {
     this.idFolder = localStorage.getItem('folderId');

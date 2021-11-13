@@ -10,6 +10,7 @@ export class TasksViewComponent implements OnInit {
   constructor() { }
 
   urlBack="folders";
+  buttonTitle="Back"
 
   ngOnInit(): void {
   }

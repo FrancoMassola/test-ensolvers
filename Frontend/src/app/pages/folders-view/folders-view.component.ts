@@ -9,8 +9,10 @@ export class FoldersViewComponent implements OnInit {
 
   constructor() { }
 
+  title = '';
+
   ngOnInit(): void {
-    localStorage.removeItem('folderId');
+    this.title = "Logout"
   }
 
 }
