@@ -5,8 +5,6 @@ const jwt = require("jsonwebtoken");
 
 const signin = async (req, res) => {
   const { user_name, password } = req.body;
-  console.log(user_name);
-  console.log(user.username);
   if (user_name !== user.username)
     return await res.status(401).send("The user doesn't exist");
   //encrypt the mock password

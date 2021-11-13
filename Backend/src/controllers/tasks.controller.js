@@ -77,7 +77,6 @@ const getTasksById = async (req, res) => {
       .request()
       .input("id", id)
       .query(sqlQueries.getTaskById);
-    console.log(result);
     //send the first element of result
     res.send(result.recordset[0]);
   } catch (error) {

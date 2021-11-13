@@ -20,7 +20,6 @@ const dbSettings = {
     const pool = await sql.connect(dbSettings);
     return pool;
   } catch (error) {
-    console.log(error);
   }
 };
 

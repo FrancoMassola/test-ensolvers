@@ -52,7 +52,6 @@ export class UpdateInputTaskComponent implements OnInit {
     //Send the task to update
     await this.taskService.updateTask(this.taskId, this.taskFounded).subscribe(
       (res) => {
-        console.log(res);
       },
       (err) => {
         alert("Error about update a task request ->"+ err);

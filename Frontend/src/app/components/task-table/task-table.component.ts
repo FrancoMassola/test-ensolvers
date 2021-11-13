@@ -30,7 +30,6 @@ export class TaskTableComponent implements OnInit {
   }
 
   goToEditView(taskId: any) {
-    console.log(taskId);
     this.router.navigate([`/editTask/${taskId}`]);
   }
 
@@ -75,6 +74,5 @@ export class TaskTableComponent implements OnInit {
         alert("Error about get a especific task request ->"+ err);
       }
     );
-    console.log(this.taskToUpdate);
   }
 }

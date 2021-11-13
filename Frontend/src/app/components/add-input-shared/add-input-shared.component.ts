@@ -35,7 +35,6 @@ export class AddInputSharedComponent implements OnInit {
   saveTaskData(form: any) {
     //get the folder id to add a new task
     this.folderId = this.route.snapshot.params['id_folder'];
-    console.log(this.folderId);
 
     let taskToSend: Task = {
       id_task: 0,
