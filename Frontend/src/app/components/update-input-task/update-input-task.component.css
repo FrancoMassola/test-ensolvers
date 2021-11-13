@@ -2,7 +2,8 @@ form {
   margin: 0 auto;
 }
 button {
-  margin-left: 15px;
+  float: right;
+  margin-right: 16px;
 }
 
 h3 {

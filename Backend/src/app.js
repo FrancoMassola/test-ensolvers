@@ -3,6 +3,7 @@ const express = require("express");
 const config = require("../src/config");
 const taskroutes = require("./routes/tasks.routes");
 const folderroutes = require("./routes/folders.routes");
+const loginroutes = require("./routes/login.routes");
 const cors = require("cors");
 
 //run express module
@@ -20,5 +21,7 @@ app.use(express.urlencoded({extended: false}));
 //set routes to app
 app.use(taskroutes);
 app.use(folderroutes);
+app.use(loginroutes);
+
 
 module.exports = app;

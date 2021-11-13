@@ -9,7 +9,8 @@ export class TasksViewComponent implements OnInit {
 
   constructor() { }
 
-  urlBack="";
+  urlBack="folders";
+  buttonTitle="Back"
 
   ngOnInit(): void {
   }

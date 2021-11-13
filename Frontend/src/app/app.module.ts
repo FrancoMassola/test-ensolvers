@@ -18,9 +18,11 @@ import { AddInputSharedComponent } from './components/add-input-shared/add-input
 //Angular material buttons
 import {MatButtonModule} from '@angular/material/button';
 import { UpdateInputTaskComponent } from './components/update-input-task/update-input-task.component';
-import { InputAddFolderComponent } from './components/input-add-folder/input-add-folder.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { LoginViewComponent } from './pages/login-view/login-view.component';
+import { InputAddFolderComponent } from './components/input-add-folder/input-add-folder.component';
+import { AuthGuardGuard } from './guards/auth-guard.guard';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,7 @@ import { LoginViewComponent } from './pages/login-view/login-view.component';
     MatButtonModule
     
   ],
-  providers: [],
+  providers: [AuthGuardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
