@@ -1,14 +1,15 @@
-//require the db connection
-const { getConnection, sql } = require("../database/connection");
-const { sqlQueries } = require("../database/queries");
+const { getConnection } = require("../database/connection");
+const Folder = require("../database/models/Folder");
 
 //define the function to get all folders
 const getFolders = async (req, res) => {
   try {
-    //implement getConnection and excecute the SQL request
-    const pool = await getConnection();
-    let result = await pool.request().query(sqlQueries.getAllFolders);
-    res.json(result.recordset);
+    //implement getConnection and execute the SQL request
+    await getConnection();
+    //find all folders
+    await Folder.findAll().then((folder) => {
+      res.json(folder);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -17,7 +18,7 @@ const getFolders = async (req, res) => {
 
 //function to add a new folder into db
 const createNewFolder = async (req, res) => {
-  let { name_folder } = req.body;
+  let { id_folder, name_folder } = req.body;
 
   //handling the post request error form the server
   if (name_folder == null) {
@@ -28,15 +29,14 @@ const createNewFolder = async (req, res) => {
 
   try {
     //db connection
-    const pool = await getConnection();
-
-    //excecute sql request
-    await pool
-      .request()
-      .input("name_folder", sql.VarChar, name_folder)
-      .query(sqlQueries.addNewFolder);
-    //send the response to the client with the new task added
-    res.json({ name_folder });
+    await getConnection();
+    //execute the request
+    await Folder.create({
+      id_folder,
+      name_folder,
+    }).then((newFolder) => {
+      res.json({ newFolder });
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -49,13 +49,10 @@ const getFoldersById = async (req, res) => {
   const { id } = req.params;
   try {
     //implement db connection
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("id", id)
-      .query(sqlQueries.getFolderById);
-    //send the first element of result
-    res.send(result.recordset[0]);
+    await getConnection();
+    await Folder.findByPk(id).then((folder) => {
+      res.json(folder.dataValues);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -68,13 +65,15 @@ const deleteFolder = async (req, res) => {
   const { id } = req.params;
   try {
     //implement db connection
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("idFolder", id)
-      .query(sqlQueries.deleteFolder);
-    //send a 204 status ok deleted
-    res.sendStatus(204);
+    await getConnection();
+    await Folder.destroy({
+      where: {
+        id_folder: id,
+      },
+    }).then((rowDeleted) => {
+      //send a 204 status ok deleted
+      res.sendStatus(204);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -86,5 +85,5 @@ module.exports = {
   getFolders,
   createNewFolder,
   getFoldersById,
-  deleteFolder
+  deleteFolder,
 };
