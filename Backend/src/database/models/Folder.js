@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
-const { sequelize } = new require("../connectionORM");
+const { DataTypes, Model } = require("sequelize");
+const { sequelize } = new require("../connection");
 
 class Folder extends Model {}
 
@@ -17,15 +17,13 @@ Folder.init(
     },
   },
   {
-    sequelize, 
+    sequelize,
     //choose the model name
-    modelName: "Folder", 
+    modelName: "Folder",
+    //disable this attributes
     createdAt: false,
     updatedAt: false,
   }
 );
-
-// for testing
-console.log(Folder === sequelize.models.Folder); // true
 
 module.exports = Folder;

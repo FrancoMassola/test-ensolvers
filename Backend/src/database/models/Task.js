@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes, Model } = require("sequelize");
-const { sequelize } = new require("../connectionORM");
+const { DataTypes, Model } = require("sequelize");
+const { sequelize } = new require("../connection");
 
 class Task extends Model {}
 
@@ -12,24 +12,24 @@ Task.init(
       autoIncrement: true,
       autoIncrementIdentity: true,
     },
-    name_task : {
+    name_task: {
       type: DataTypes.STRING,
     },
-    status_task:{
-        type: DataTypes.INTEGER
+    status_task: {
+      type: DataTypes.INTEGER,
     },
     id_task_folder: {
-        type: DataTypes.INTEGER
-    }
+      type: DataTypes.INTEGER,
+    },
   },
   {
     sequelize,
-    modelName: "Task", //Model name
+    //Model name
+    modelName: "Task",
+    //disable this attributes
     createdAt: false,
     updatedAt: false,
   }
 );
-
-console.log(Task === sequelize.models.Task); // true
 
 module.exports = Task;
