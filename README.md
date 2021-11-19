@@ -21,7 +21,15 @@ DB_PASSWORD = ensolvers123
 DB_SERVER = localhost
 DB_DATABASE = testchallenge
 ```
->to use the database locally you should have a SQL server user and the password, create a database and two tables called Task and Folder, implement all the configurations as indicated in the .env file.
+>to use the database locally you should have a SQL server user and the password, create a database and two tables called Tasks and Folders, implement all the configurations as indicated in the .env file.
+### Create two database tables
+```
+CREATE TABLE Folders (                       |  CREATE TABLE Tasks (                                             
+    id_folder int IDENTITY(1,1) PRIMARY KEY, |  id_task int IDENTITY(1,1) PRIMARY KEY,
+    name_folder varchar(40) NOT NULL         |  name_task varchar(40) NOT NULL,
+);                                           |  status_task bit,
+                                             |  id_task_folder int FOREIGN KEY REFERENCES Folders(id_folder)ON DELETE CASCADE);
+```
 
 ## Login data
 - user: ensolvers
@@ -60,13 +68,13 @@ DB_DATABASE = testchallenge
 >before executing the script the existing .env must be removed.
 
 ## Deploy details
-Backend - Heroku
-- https://ensolvers-app-challenge.herokuapp.com
+Backend - Heroku (updated 19/11/2021)
+- https://ensolversstart.herokuapp.com/
 
-Frontend - Netlify
-- https://admiring-kowalevski-4f3eec.netlify.app/
+Frontend - Netlify (updated 19/11/2021)
+- https://frosty-gates-4d5d0a.netlify.app/
 
-Bd - Azure
+Bd - Azure (tables updated 19/11/2021)
 - Server Name: serverappx2020.database.windows.net
 
 ## Azure details
