@@ -1,37 +1,37 @@
-//require the db connection
-const { getConnection, sql } = require("../database/connection");
-const { sqlQueries } = require("../database/queries");
+const { getConnection } = require("../database/connection");
+const Task = require("../database/models/Task");
 
 //define the function to get all tasks
 const getTasks = async (req, res) => {
   try {
-    //implement getConnection and excecute the SQL request
-    const pool = await getConnection();
-    let result = await pool.request().query(sqlQueries.getAllTasks);
-    res.json(result.recordset);
+    //implement getConnection and execute the request
+    await getConnection();
+    await Task.findAll({}).then((tasks) => {
+      res.json(tasks);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
 };
 
-//define the function to get all especifics folder tasks
+//define the function to get all specifics folder tasks
 const getFolderTasks = async (req, res) => {
-  let { id_folder } = req.params
+  let { id_folder } = req.params;
   try {
-    //implement getConnection and excecute the SQL request
-    const pool = await getConnection();
-    let result = await pool.request()
-    .input("id_folder", sql.Int, id_folder)
-    .query(sqlQueries.getFolderTasks);
-    res.json(result.recordset);
+    //implement db connection
+    await getConnection();
+    //get all tasks related with a specific folder
+    await Task.findAll({
+      where: { id_task_folder: id_folder },
+    }).then((task) => {
+      res.json(task);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
   }
 };
-
-
 
 //function to add a new task into db
 const createNewTask = async (req, res) => {
@@ -49,17 +49,16 @@ const createNewTask = async (req, res) => {
 
   try {
     //db connection
-    const pool = await getConnection();
-
-    //excecute sql request
-    await pool
-      .request()
-      .input("name_task", sql.VarChar, name_task)
-      .input("status_task", sql.Bit, status_task)
-      .input("id_task_folder", sql.Int, id_task_folder)
-      .query(sqlQueries.addNewTask);
-    //send the response to the client with the new task added
-    res.json({ name_task, status_task, id_task_folder });
+    await getConnection();
+    //execute the request
+    await Task.create({
+      name_task,
+      status_task,
+      id_task_folder,
+    }).then((newTaskAdded) => {
+      //send the new task added to the client
+      res.json(newTaskAdded);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -68,17 +67,15 @@ const createNewTask = async (req, res) => {
 
 //get a task by id
 const getTasksById = async (req, res) => {
-  //get the id
+  //get the task id
   const { id } = req.params;
   try {
     //implement db connection
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("id", id)
-      .query(sqlQueries.getTaskById);
-    //send the first element of result
-    res.send(result.recordset[0]);
+    await getConnection();
+    //get a task by id
+    await Task.findByPk(id).then((taskFounded) => {
+      res.json(taskFounded);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -87,17 +84,18 @@ const getTasksById = async (req, res) => {
 
 //delete a task by id
 const deleteTask = async (req, res) => {
-  //get the id
+  //get the task id
   const { id } = req.params;
   try {
     //implement db connection
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("id", id)
-      .query(sqlQueries.deleteTask);
-    //send a 204 status ok deleted
-    res.sendStatus(204);
+    await getConnection();
+    //execute the deletion
+    await Task.destroy({
+      where: { id_task: id },
+    }).then((taskRemoved) => {
+      //send a 204 status ok deleted
+      res.sendStatus(204);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -116,15 +114,21 @@ const updateOneTask = async (req, res) => {
   }
   try {
     //implement db connection
-    const pool = await getConnection();
-    const result = await pool
-      .request()
-      .input("name_task", sql.VarChar, name_task)
-      .input("status_task", sql.Bit, status_task)
-      .input("id", sql.Int, id)
-      .query(sqlQueries.updateTaskById);
-
-    res.json({ name_task, status_task });
+    await getConnection();
+    //update a task request
+    await Task.update(
+      {
+        name_task,
+        status_task,
+      },
+      {
+        where: {
+          id_task: id,
+        },
+      }
+    ).then((taskUpdated) => {
+      res.json(taskUpdated);
+    });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -138,5 +142,5 @@ module.exports = {
   getTasksById,
   deleteTask,
   updateOneTask,
-  getFolderTasks
+  getFolderTasks,
 };

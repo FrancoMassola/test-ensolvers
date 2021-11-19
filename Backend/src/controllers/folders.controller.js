@@ -1,15 +1,15 @@
-const { getConnection, sequelize } = require("../database/connectionORM");
+const { getConnection } = require("../database/connection");
 const Folder = require("../database/models/Folder");
 
 //define the function to get all folders
 const getFolders = async (req, res) => {
   try {
-    //implement getConnection and excecute the SQL request
+    //implement getConnection and execute the SQL request
     await getConnection();
+    //find all folders
     await Folder.findAll().then((folder) => {
       res.json(folder);
     });
-    // Folder.findAll().then()
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -30,7 +30,7 @@ const createNewFolder = async (req, res) => {
   try {
     //db connection
     await getConnection();
-    //excecute request
+    //execute the request
     await Folder.create({
       id_folder,
       name_folder,
@@ -59,7 +59,7 @@ const getFoldersById = async (req, res) => {
   }
 };
 
-// //delete a folder by id
+//delete a folder by id
 const deleteFolder = async (req, res) => {
   //get the id
   const { id } = req.params;
