@@ -8,11 +8,10 @@ const router = Router();
 //get all folders
 router.get("/folders", folderControllers.getFolders);
 //add new folder
-router.post("/folders", folderControllers.createNewFolder );
-//get one especific folder
+router.post("/folders", folderControllers.createNewFolder);
+//get one specific folder
 router.get("/folders/:id", folderControllers.getFoldersById);
 //delete a folder
-router.delete("/folders/:id",folderControllers.deleteFolder);
-
+router.delete("/folders/:id", folderControllers.deleteFolder);
 
 module.exports = router;

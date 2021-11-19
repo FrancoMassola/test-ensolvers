@@ -1,30 +1,31 @@
-const sql = require("mssql");
+//Require OMR Sequelize
+const { Sequelize } = require("sequelize");
 const config = require("../config");
 
-//define db connection settings
-const dbSettings = {
-  user: config.dbUser,
-  password: config.dbPassword,
-  server: config.dbServer,
-  database: config.dbDatabase,
-  options: {
-    encrypt: true, // for azure
-    trustServerCertificate: true, // change to true for local dev / self-signed certs
-  },
-};
+//declare a sequelize object with db settings
+const sequelize = new Sequelize(
+  config.dbDatabase,
+  config.dbUser,
+  config.dbPassword,
+  {
+    host: config.dbServer,
+    dialect: "mssql",
+    omitNull: true,
+  }
+);
 
-//connect -> async function
- const getConnection = async () => {
-  //db request connection handler
+//connect to the database
+const getConnection = async () => {
   try {
-    const pool = await sql.connect(dbSettings);
-    return pool;
+    await sequelize.authenticate().then((res) => {
+      console.log("Database connection successful");
+    });
   } catch (error) {
+    console.log("Database connection failed", error);
   }
 };
 
-//export sql to use in controllers
-module.exports={
+module.exports = {
+  sequelize,
   getConnection,
-  sql
-}
+};

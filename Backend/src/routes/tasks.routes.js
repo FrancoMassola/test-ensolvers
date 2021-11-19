@@ -1,7 +1,14 @@
 //require Router module of express
 const Router = require("express");
-const { getTasks, createNewTask, getTasksById, deleteTask, updateOneTask, getFolderTasks } = require("../controllers/tasks.controller");
-const jwt= require('jsonwebtoken')
+const {
+  getTasks,
+  createNewTask,
+  getTasksById,
+  deleteTask,
+  updateOneTask,
+  getFolderTasks,
+} = require("../controllers/tasks.controller");
+const jwt = require("jsonwebtoken");
 
 //generate a instance of the Router
 const router = Router();
@@ -10,13 +17,13 @@ const router = Router();
 router.get("/tasks", getTasks);
 //add new task
 router.post("/tasks", createNewTask);
-//get one especific task
-router.get("/tasks/:id",getTasksById);
+//get one specific task
+router.get("/tasks/:id", getTasksById);
 //update a task
 router.put("/tasks/:id", updateOneTask);
 //delete a task
-router.delete("/tasks/:id",deleteTask);
-//get all the tasks in a especific folder
-router.get("/folderTasks/:id_folder",getFolderTasks)
+router.delete("/tasks/:id", deleteTask);
+//get all the tasks in a specific folder
+router.get("/folderTasks/:id_folder", getFolderTasks);
 
 module.exports = router;
