@@ -27,6 +27,9 @@ export class TaskTableComponent implements OnInit {
   //update the task list when a new task was added
   updateList(newTask: any) {
     this.taskArray = [...this.taskArray, newTask];
+    //Refresh the task list when one new task was added
+    this.taskArray = [];
+    this.getAllTheFolderTasks();
   }
 
   goToEditView(taskId: any) {

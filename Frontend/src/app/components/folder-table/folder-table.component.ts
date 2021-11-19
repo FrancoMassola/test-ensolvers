@@ -30,6 +30,9 @@ export class FolderTableComponent implements OnInit {
 
   updateFolderList(newFolder: any){
     this.folderArray=[...this.folderArray,newFolder]
+    //Refresh the folder list when one new folder was added
+    this,this.folderArray=[];
+    this.getAllTheFolders();
   }
 
   goToListTasks=(folderId: any)=>{
